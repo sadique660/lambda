@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo "This is build phase...zipping my webpage"
+      zip -r deployment_package.zip lambda_funtion.py
+      
+    post_build:
+      commands:
+        - echo "Deploying  to the lambda" 
+        - aws lambda update-function-code --function_name cicd-pipeline-function --zip-file fileb:deployment_package.zip
+artifacts:
+  types: zip
+  paths: 
+    - '*'
