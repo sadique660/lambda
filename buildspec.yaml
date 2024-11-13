@@ -4,7 +4,6 @@ phases:
     commands:
       - echo "Updating Lambda Function"
       zip -r deployment_package.zip lambda_funtion.py
-      
     post_build:
       commands:
         - echo "Deploying  to the lambda" 
