@@ -4,11 +4,15 @@ phases:
   build:
     commands:
       - echo "Updating Lambda Function"
-      - zip -r deployment_package.zip lambda_function.py
+      - cd lib
+      - zip -r9 ../deployment_package.zip . 
+      - cd..
+      - zip -g deployment_package.zip lambda_function.py
     post_build:
       commands:
         - echo "Deploying  to the lambda" 
         - aws lambda update-function-code --function-name cicd-pipeline-function --zip-file fileb://deployment_package.zip
+        - echo "Done dana done.."
 artifacts:
   types: zip
   paths: 
